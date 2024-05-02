@@ -6,6 +6,7 @@ use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -37,8 +38,9 @@ class PageResource extends Resource
                                             Radio::make('widget')
                                                 ->options(
                                                     [
-                                                        'widget-1' => 'Widget 1',
-                                                        'widget-2' => 'Widget 2',
+                                                        'widget-1' => 'Select + Text',
+                                                        'widget-2' => 'Select + Checkboxes + Text',
+                                                        'widget-3' => 'Text',
                                                     ]
                                                 ),
                                         ]),
@@ -58,9 +60,35 @@ class PageResource extends Resource
                                                             ]),
                                                         TextInput::make('widget-1-text'),
                                                     ],
-                                                    default => [
+                                                    'widget-2' => [
+                                                        Select::make('broken-js-select-box')
+                                                            ->multiple()
+                                                            ->options([
+                                                                'option-1' => 'Option 1',
+                                                                'option-2' => 'Option 2',
+                                                                'option-3' => 'Option 3',
+                                                            ]),
+                                                        CheckboxList::make('widget-2-checkbox')
+                                                            ->options(
+                                                                [
+                                                                    'option-1' => 'Option 1',
+                                                                    'option-2' => 'Option 2',
+                                                                    'option-3' => 'Option 3',
+                                                                ]
+                                                            ),
                                                         TextInput::make('widget-2-text'),
                                                     ],
+                                                    'widget-3' => [
+                                                        Select::make('broken-js-select-box')
+                                                            ->multiple()
+                                                            ->options([
+                                                                'option-1' => 'Option 1',
+                                                                'option-2' => 'Option 2',
+                                                                'option-3' => 'Option 3',
+                                                            ]),
+                                                        TextInput::make('widget-3-text'),
+                                                    ],
+                                                    default => [],
                                                 };
                                             }
                                         ),
