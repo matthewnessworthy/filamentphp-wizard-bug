@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
+use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -26,7 +27,7 @@ class PageResource extends Resource
     {
         return $form
             ->schema([
-                \Filament\Forms\Components\Builder::make('content_blocks')
+                Builder::make('content_blocks')
                     ->blocks([
                         Block::make('widget')
                             ->schema([
@@ -48,19 +49,17 @@ class PageResource extends Resource
 
                                                 return match ($widget) {
                                                     'widget-1' => [
-                                                        Select::make('broken_js_select_box')
+                                                        Select::make('broken-js-select-box')
                                                             ->multiple()
                                                             ->options([
                                                                 'option-1' => 'Option 1',
                                                                 'option-2' => 'Option 2',
                                                                 'option-3' => 'Option 3',
                                                             ]),
+                                                        TextInput::make('widget-1-text'),
                                                     ],
                                                     default => [
-                                                        TextInput::make('limit')
-                                                            ->integer()
-                                                            ->minValue(1)
-                                                            ->maxValue(2),
+                                                        TextInput::make('widget-2-text'),
                                                     ],
                                                 };
                                             }
