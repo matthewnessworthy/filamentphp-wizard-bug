@@ -51,7 +51,7 @@ class PageResource extends Resource
 
                                                 return match ($widget) {
                                                     'widget-1' => [
-                                                        Select::make('broken-js-select-box')
+                                                        Select::make('widget-1-select')
                                                             ->multiple()
                                                             ->options([
                                                                 'option-1' => 'Option 1',
@@ -61,7 +61,7 @@ class PageResource extends Resource
                                                         TextInput::make('widget-1-text'),
                                                     ],
                                                     'widget-2' => [
-                                                        Select::make('broken-js-select-box')
+                                                        Select::make('widget-2-select')
                                                             ->multiple()
                                                             ->options([
                                                                 'option-1' => 'Option 1',
@@ -79,7 +79,7 @@ class PageResource extends Resource
                                                         TextInput::make('widget-2-text'),
                                                     ],
                                                     'widget-3' => [
-                                                        Select::make('broken-js-select-box')
+                                                        Select::make('widget-3-select')
                                                             ->multiple()
                                                             ->options([
                                                                 'option-1' => 'Option 1',
