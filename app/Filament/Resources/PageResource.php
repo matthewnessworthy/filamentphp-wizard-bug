@@ -33,17 +33,44 @@ class PageResource extends Resource
                         Block::make('widget')
                             ->schema([
                                 Wizard::make([
-                                    Step::make('Widget')
+                                    Step::make('Group')
                                         ->schema([
-                                            Radio::make('widget')
+                                            Radio::make('group')
                                                 ->options(
                                                     [
-                                                        'widget-1' => 'Select + Text',
-                                                        'widget-2' => 'Select + Checkboxes + Text',
-                                                        'widget-3' => 'Text',
+                                                        'group-1' => 'Nothing',
+                                                        'group-2' => 'Widgets',
+                                                        'group-3' => 'Nothing',
                                                     ]
                                                 ),
                                         ]),
+                                    Step::make('Widget')
+                                        ->schema(
+                                            function (Get $get) {
+                                                $group = (string) $get('group');
+
+                                                return match ($group) {
+                                                    'group-2' => [
+                                                        Radio::make('widget')
+                                                            ->options(
+                                                                [
+                                                                    'widget-1' => 'Select + Text',
+                                                                    'widget-2' => 'Select + Checkboxes + Text',
+                                                                    'widget-3' => 'Text',
+                                                                ]
+                                                            ),
+                                                    ],
+                                                    default => [],
+                                                };
+                                            }
+                                        )
+                                        ->afterStateUpdated(
+                                            fn (Step $component) => $component
+                                                ->getContainer()
+                                                ->getComponent('fields')
+                                                ->getChildComponentContainer()
+                                                ->fill()
+                                        ),
                                     Step::make('Fields')
                                         ->schema(
                                             function (Get $get) {
@@ -91,10 +118,12 @@ class PageResource extends Resource
                                                     default => [],
                                                 };
                                             }
-                                        ),
+                                        )
+                                    ->key('fields'),
                                 ]),
                             ]),
                     ])
+                    ->collapsed()
             ]);
     }
 
